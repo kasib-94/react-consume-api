@@ -1,5 +1,6 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import { useNavigate } from "react-router-dom";
+import UserContext from "./UserContext";
 
 
 function Login (){
@@ -7,17 +8,22 @@ function Login (){
     const [users, setUsers]= useState(true);
     const[errors, setError] = useState("pt-3 hidden")
 
+    const { login } = useContext(UserContext);
+    const [name, setName] = useState();
+
 
     const handleSubmit =(e)=>{
         e.preventDefault()
         console.log(document.getElementById("username").value)
 
         const result = users.find(item=>item.email===document.getElementById("username").value)
-console.log(users)
+        console.log(users)
         console.log(result)
         if(result!==undefined){
-            localStorage.setItem('user',JSON.stringify(result))
 
+            localStorage.setItem('user',JSON.stringify(result)) ;
+            console.log(name)
+            login(name);
             console.log(JSON.parse(localStorage.getItem('user')))
             navigate("/home");
 
@@ -73,7 +79,7 @@ console.log(users)
                                 <strong className="font-bold">Holy smokes ! </strong>
                                 <span className="block sm:inline "
 
-                                >Wrong e-mail !</span>
+                                >Wrong e-mail ! Julianne.OConner@kory.org</span>
 
                             </div>
                         </div>
