@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "./Home";
-import App from "../App";
+import Account from "./Account"
 
 function AuthApp() {
     return (
@@ -28,6 +28,13 @@ function AuthApp() {
                         <>
                             < Navbar/>
                             < Home/>
+                        </>
+
+                    }/>
+                    <Route path="/account" element={
+                        <>
+                            < Navbar/>
+                            < Account/>
                         </>
 
                     }/>
