@@ -1,48 +1,40 @@
-import React,{useState,useEffect,useContext} from 'react';
-import { useNavigate } from "react-router-dom";
-import UserContext from "./UserContext";
+import React, {useState, useEffect, useContext} from 'react';
+import {useNavigate} from "react-router-dom";
 
 
-function Login (){
+function Login() {
     const navigate = useNavigate();
-    const [users, setUsers]= useState(true);
-    const[errors, setError] = useState("pt-3 hidden")
-
-    const { login } = useContext(UserContext);
-    const [name, setName] = useState();
+    const [users, setUsers] = useState(true);
+    const [errors, setError] = useState("pt-3 hidden")
 
 
-    const handleSubmit =(e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault()
         console.log(document.getElementById("username").value)
 
-        const result = users.find(item=>item.email===document.getElementById("username").value)
+        const result = users.find(item => item.email === document.getElementById("username").value)
         console.log(users)
         console.log(result)
-        if(result!==undefined){
+        if (result !== undefined) {
 
-            localStorage.setItem('user',JSON.stringify(result)) ;
-            console.log(name)
-            login(name);
+            localStorage.setItem('user', JSON.stringify(result));
             console.log(JSON.parse(localStorage.getItem('user')))
             navigate("/home");
+            window.location.reload()
 
-        }else{
+        } else {
             setError("pt-3")
         }
     }
 
 
-
-
-    useEffect(()=>{
+    useEffect(() => {
 
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(json => setUsers(json))
-        .catch(error => setError(error))
-    },[errors])
-
+            .catch(error => setError(error))
+    }, [errors])
 
 
     return (
@@ -58,7 +50,7 @@ function Login (){
                         </svg>
                     </div>
                     <form className="p-12 md:p-24"
-                    onSubmit={handleSubmit}>
+                          onSubmit={handleSubmit}>
                         <div className="flex items-center text-lg mb-6 md:mb-8">
                             <svg className="absolute ml-3" width="24" viewBox="0 0 24 24">
                                 <path
@@ -73,7 +65,7 @@ function Login (){
                             className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full">Login
                         </button>
 
-                        <div className={errors} id="error" >
+                        <div className={errors} id="error">
                             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
                                  role="alert">
                                 <strong className="font-bold">Holy smokes ! </strong>

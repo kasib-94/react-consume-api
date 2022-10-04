@@ -1,19 +1,13 @@
-import React, { useContext } from 'react';
-import  UserContext  from './UserContext'
+import React, {useContext, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 
-function Navbar(){
-    const { user, logout } = useContext(UserContext);
+function Navbar() {
     const navigate = useNavigate();
-
-    return(
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+    return (
         <>
-            <h1>Hello, {user.name}!</h1>
-            <button onClick={event => {
-                logout();
-                localStorage.clear()
-                navigate('/');
-            }}>Logout</button>
+
+
         </>
     )
 }

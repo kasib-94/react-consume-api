@@ -1,13 +1,10 @@
-import React, { useContext, useState } from 'react';
-import  UserContext  from './UserContext';
+import React, {useContext, useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Navbar from "./Navbar";
-import Home from "./Home";
 import Login from "./Login";
+import App from "../App";
+import AuthApp from "./AuthApp";
 
 function UnauthApp() {
-    const { login } = useContext(UserContext);
-    const [name, setName] = useState();
 
     return (
         <>
@@ -15,7 +12,13 @@ function UnauthApp() {
                 <Routes>
                     <Route path="/" element={
                         <>
-                            < Login />
+                            < Login/>
+                        </>
+
+                    }/>
+                    <Route path="/home" element={
+                        <>
+                            < Login/>
                         </>
 
                     }/>
