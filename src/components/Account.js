@@ -5,6 +5,8 @@ function Account() {
 
 
     const navigate = useNavigate();
+
+
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -24,6 +26,7 @@ function Account() {
         })
             .then((response) => response.json())
             .then((json) => console.log(json));
+        
         navigate("/home")
 
     }
