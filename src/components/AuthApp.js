@@ -43,7 +43,7 @@ function AuthApp() {
                         </>
 
                     }/>
-                    <Route path="/user/:id" element={
+                    <Route path="/users/:id" element={
                         <>
 
                             < Navbar/>

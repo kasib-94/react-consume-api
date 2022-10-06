@@ -26,7 +26,7 @@ function UserSearch() {
         if (result === undefined) {
             document.getElementById("error").className = "pt-4";
         } else {
-            navigate(`user/${result.id}`);
+            navigate(`../users/${result.id}`);
         }
 
     }

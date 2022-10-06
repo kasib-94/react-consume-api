@@ -7,6 +7,7 @@ function Home() {
     const [photos, setPhotos] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(27)
+
     useEffect(() => {
         console.log("pierwsze")
 
@@ -29,7 +30,7 @@ function Home() {
 
     }, [])
 
-    console.log("xd")
+
     const lastPostIndex = currentPage * postsPerPage
     const firstPostIndex = lastPostIndex - postsPerPage
     const currentPosts = photos.slice(firstPostIndex, lastPostIndex)
@@ -40,7 +41,7 @@ function Home() {
             <div className="flex-row flex-wrap justify-between overflow-y-auto">
 
                 {console.log("zaczyna sie")}
-                {currentPosts?.map((item) => {
+                {currentPosts.map((item) => {
                     return <Card
                         containerSelector
                         key={item.id}
