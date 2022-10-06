@@ -8,6 +8,9 @@ import {
 import Navbar from "./Navbar";
 import Home from "./Home";
 import Account from "./Account"
+import UserSearch from "./UserSearch"
+import User from "./User"
+
 
 function AuthApp() {
     return (
@@ -17,14 +20,18 @@ function AuthApp() {
                 <Routes>
                     <Route path="/home" element={
                         <>
+
                             < Navbar/>
+                            <UserSearch/>
                             < Home/>
                         </>
 
                     }/>
                     <Route path="/" element={
                         <>
+
                             < Navbar/>
+                            <UserSearch/>
                             < Home/>
                         </>
 
@@ -33,6 +40,14 @@ function AuthApp() {
                         <>
                             < Navbar/>
                             < Account/>
+                        </>
+
+                    }/>
+                    <Route path="/user/:id" element={
+                        <>
+
+                            < Navbar/>
+                            <User/>
                         </>
 
                     }/>

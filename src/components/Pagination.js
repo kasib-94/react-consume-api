@@ -15,7 +15,7 @@ const Pagination = ({totalPosts, postsPerPage, setCurrentPage, currentPage}) => 
                     return <button
                         key={index}
                         onClick={() => setCurrentPage(page)}
-                        className={page == currentPage ? "active" : ""}>
+                        className={page === currentPage ? "active" : ""}>
 
                         {page} </button>
                 })}
