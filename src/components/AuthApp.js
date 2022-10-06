@@ -1,11 +1,9 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
     Routes,
-    Link
 } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "./Home";

@@ -1,37 +1,47 @@
-import React, {Component, useEffect, useState} from 'react';
-import Photo from "./Photo";
+import React, {useEffect, useState} from "react";
+import Card from "./Card";
+import Pagination from "./Pagination";
 
-class Home extends Component {
-    state = {
-        data: []
-    }
+function Home() {
 
+    const [photos, setPhotos] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage, setPostsPerPage] = useState(27)
+    useEffect(() => {
+        console.log("pierwsze")
 
-    async componentDidMount() {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://jsonplaceholder.typicode.com/photos')
+                const data = await response.json();
+                console.log(data)
+                await setPhotos(data)
 
-        try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/photos')
-            const data = await response.json();
-            console.log(data)
-            this.setState({
-                data: data
-            })
-        } catch (err) {
-            console.log(err)
+            } catch (err) {
+                console.log(err)
 
+            }
         }
+        console.log("drugie")
+        fetchData()
+        console.log("trzecioe")
 
 
-    }
+    }, [])
 
-    render() {
-        console.log('render method called')
-        const {data} = this.state
-        return (
+    console.log("xd")
+    const lastPostIndex = currentPage * postsPerPage
+    const firstPostIndex = lastPostIndex - postsPerPage
+    const currentPosts = photos.slice(firstPostIndex, lastPostIndex)
+
+    return (
+        <>
+
             <div className="flex-row flex-wrap justify-between overflow-y-auto">
+
                 {console.log("zaczyna sie")}
-                {data.map((item) => {
-                    return <Photo
+                {currentPosts?.map((item) => {
+                    return <Card
                         containerSelector
                         key={item.id}
                         thumbnailUrl={item.thumbnailUrl}
@@ -39,10 +49,16 @@ class Home extends Component {
                         title={item.title}
                     />
                 })}
-
+                <Pagination
+                    totalPosts={photos.length}
+                    postsPerPage={postsPerPage}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                ></Pagination>
             </div>
-        )
-    }
+
+        </>
+    )
 }
 
 export default Home

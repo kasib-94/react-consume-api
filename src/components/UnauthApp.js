@@ -1,8 +1,6 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Login from "./Login";
-import App from "../App";
-import AuthApp from "./AuthApp";
 
 function UnauthApp() {
 
