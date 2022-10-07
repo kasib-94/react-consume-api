@@ -11,6 +11,10 @@ import Account from "./Account"
 import UserSearch from "./UserSearch"
 import User from "./User"
 import PostList from "./PostList";
+import Album from "./Album";
+import AlbumList from "./AlbumList";
+import CardList from "./CardList";
+import Card from "./Card";
 
 
 function AuthApp() {
@@ -50,6 +54,39 @@ function AuthApp() {
                             < Navbar/>
                             <User/>
                             < PostList/>
+                        </>
+
+                    }/>
+
+                    <Route path="/albums" element={
+                        <>
+
+                            < Navbar/>
+                            <AlbumList/>
+                        </>
+
+                    }/>
+                    <Route path="/album/:id" element={
+                        <>
+
+                            < Navbar/>
+                            <Album/>
+                        </>
+
+                    }/>
+                    <Route path="/cardlist/:id" element={
+                        <>
+
+                            < Navbar/>
+                            <CardList/>
+                        </>
+
+                    }/>
+                    <Route path="/card/:id" element={
+                        <>
+
+                            < Navbar/>
+                            <Card/>
                         </>
 
                     }/>
