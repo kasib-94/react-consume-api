@@ -15,6 +15,8 @@ import Album from "./Album";
 import AlbumList from "./AlbumList";
 import CardList from "./CardList";
 import Card from "./Card";
+import Post from "./Post";
+import PostView from "./PostView";
 
 
 function AuthApp() {
@@ -87,6 +89,22 @@ function AuthApp() {
 
                             < Navbar/>
                             <Card/>
+                        </>
+
+                    }/>
+                    <Route path="/post/:id" element={
+                        <>
+
+                            < Navbar/>
+                            <PostView/>
+                        </>
+
+                    }/>
+                    <Route path="/post" element={
+                        <>
+
+                            < Navbar/>
+                            <PostList/>
                         </>
 
                     }/>

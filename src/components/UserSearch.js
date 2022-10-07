@@ -52,7 +52,7 @@ function UserSearch() {
                     <strong className="font-bold">Holy smokes ! </strong>
                     <span className="block sm:inline "
 
-                    >Cannot find user with username: {username}</span>
+                    >Cannot find user with username: {username} , example user : bret</span>
 
                 </div>
             </div>

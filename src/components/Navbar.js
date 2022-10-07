@@ -22,6 +22,10 @@ function Navbar() {
                         <a href="/home"
                            className="mr-6 text-sm font-medium text-gray-500 dark:text-white hover:underline">See Photos
                             !</a>
+                        <a href="/post"
+                           className="mr-6 text-sm font-medium text-gray-500 dark:text-white hover:underline">See Posts
+                            
+                            !</a>
                         <a href="/account"
                            className="mr-6 text-sm font-medium text-gray-500 dark:text-white hover:underline">{user.email}</a>
                         <a href="#"

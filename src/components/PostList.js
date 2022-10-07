@@ -12,9 +12,15 @@ function PostList() {
 
 
         const fetchData = () => {
-            fetch('https://jsonplaceholder.typicode.com/posts')
-                .then(response => response.json())
-                .then(json => setPosts(json.filter(x => x.userId == id)))
+            if (id !== undefined) {
+                fetch('https://jsonplaceholder.typicode.com/posts')
+                    .then(response => response.json())
+                    .then(json => setPosts(json.filter(x => x.userId == id)))
+            } else {
+                fetch('https://jsonplaceholder.typicode.com/posts')
+                    .then(response => response.json())
+                    .then(json => setPosts(json))
+            }
         }
 
         fetchData()
@@ -27,14 +33,16 @@ function PostList() {
         <>
 
             <div className="flex-row flex-wrap justify-between overflow-y-auto">
-     
+
                 {console.log(posts)}
                 {posts.map((item) => {
                     return <Post
                         key={item.id}
+                        id={item.id}
                         userId={item.userId}
                         title={item.title}
                         body={item.body}
+                        comments={true}
                     />
                 })}
 

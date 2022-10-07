@@ -30,12 +30,12 @@ export const Album = ({
     if (data !== undefined) {
         return (
 
-            <div className="flex-row justify-evenly w-auto inline-block w-full p-4 w-50 h-40 ">
+            <div className="flex-row justify-evenly w-auto inline-block w-full p-4 w-50 h-40 border-4">
                 <div className="space-y-2 h-40 ">
                     <h3 className="text-2xl font-semibold">
-                        Album With Title :
+                        {data.title}
                     </h3>
-                    <h2>{data.title}</h2>
+
                     <button onClick={linkToCardList}> See Album</button>
                 </div>
             </div>

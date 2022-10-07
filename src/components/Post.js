@@ -6,7 +6,8 @@ export const Post = ({
                          userId,
                          id,
                          title,
-                         body
+                         body,
+                         comments
                      }) => {
 
     const navigate = useNavigate();
@@ -26,6 +27,11 @@ export const Post = ({
 
     }
 
+    function linkToPost() {
+        console.log(id)
+        navigate(`../post/${id}`)
+
+    }
 
     if (data !== undefined) {
         return (
@@ -38,18 +44,26 @@ export const Post = ({
                     <p className="text-gray-600">
                         {body}
                     </p>
-                    <p
-                        className="text-gray-600">
-                        <p>author:</p>
-                        <div
+                    <div
+                        className="flex flex-row text-gray-600 ">
+                        <p
+                            className="text-2xl"
+                        >author:</p>
+                        <button
                             onClick={linkToUser}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 border border-blue-700 rounded"
+                            className="inline-block pl-5 underline text-2xl "
                         >{data.username}
 
-                        </div>
+                        </button>
 
+                        <button
+                            onClick={linkToPost}
+                            className="block inline-block pl-5 underline text-2xl "
+                        >{comments == true ? "See Comments !" : ''}
 
-                    </p>
+                        </button>
+
+                    </div>
                 </div>
             </div>
 
