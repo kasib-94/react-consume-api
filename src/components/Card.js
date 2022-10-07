@@ -10,7 +10,7 @@ export const Card = ({
                      }) => {
     return (
         <div
-            className="inline-block  w-1/3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            className="inline-block  w-1/3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 justify-center">
             <a>
                 <img className="rounded-t-lg" src={thumbnailUrl} alt=""/>
             </a>

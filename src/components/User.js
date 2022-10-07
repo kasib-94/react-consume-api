@@ -23,7 +23,6 @@ function User() {
         }
 
         fetchData()
-        console.log(user)
 
     }, [])
 
@@ -47,23 +46,14 @@ function User() {
                     <label htmlFor="small-input"
                            className=" text-2xl  font-medium text-gray-900 dark:text-gray-300 text-left"> {user.username}</label>
                 </div>
-                <div className="w-80 mx-auto mt-2 block">
-                    <label htmlFor="small-input"
-                           className=" text-2xl  font-medium text-gray-900 dark:text-gray-300 text-left">City
-                        :</label>
-                    <label htmlFor="small-input"
-                           className=" text-2xl  font-medium text-gray-900 dark:text-gray-300 text-left"> {user.address.city}</label>
-                </div>
 
                 <div className="w-80 mx-auto mt-2 block">
                     <label htmlFor="small-input"
-                           className=" text-2xl  font-medium text-gray-900 dark:text-gray-300 text-left">Webiste
+                           className=" text-2xl  font-medium text-gray-900 dark:text-gray-300 text-left">Website
                         :</label>
                     <label htmlFor="small-input"
                            className=" text-2xl  font-medium text-gray-900 dark:text-gray-300 text-left"> {user.website}</label>
                 </div>
-
-
             </div>
 
         </>

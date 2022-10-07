@@ -10,6 +10,7 @@ import Home from "./Home";
 import Account from "./Account"
 import UserSearch from "./UserSearch"
 import User from "./User"
+import PostList from "./PostList";
 
 
 function AuthApp() {
@@ -48,6 +49,7 @@ function AuthApp() {
 
                             < Navbar/>
                             <User/>
+                            < PostList/>
                         </>
 
                     }/>
