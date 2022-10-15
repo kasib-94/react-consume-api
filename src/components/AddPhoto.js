@@ -6,7 +6,7 @@ function Account(effect, deps) {
 
     const navigate = useNavigate();
 
-    const [albums, setAbums] = useState([])
+    const [albums, setAlbums] = useState([])
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -35,7 +35,7 @@ function Account(effect, deps) {
 
         fetch(`https://jsonplaceholder.typicode.com/albums?userId=${user.id}`)
             .then(response => response.json())
-            .then(json => setAbums(json))
+            .then(json => setAlbums(json))
         console.log(albums)
 
     }, [])

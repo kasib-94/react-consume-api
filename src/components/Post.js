@@ -18,7 +18,6 @@ export const Post = ({
 
 
     })
-    console.log(data)
 
 
     function linkToUser() {

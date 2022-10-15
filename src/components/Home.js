@@ -11,23 +11,17 @@ function Home() {
     const [postsPerPage, setPostsPerPage] = useState(27)
 
     useEffect(() => {
-        console.log("pierwsze")
-
         const fetchData = async () => {
             try {
                 const response = await fetch('https://jsonplaceholder.typicode.com/photos')
                 const data = await response.json();
-                console.log(data)
                 await setPhotos(data)
-
             } catch (err) {
                 console.log(err)
-
             }
         }
-        console.log("drugie")
+
         fetchData()
-        console.log("trzecioe")
 
 
     }, [])
@@ -62,6 +56,8 @@ function Home() {
                         thumbnailUrl={item.thumbnailUrl}
                         url={item.url}
                         title={item.title}
+                        albumId={item.albumId}
+                        id={item.id}
                     />
                 })}
                 <Pagination

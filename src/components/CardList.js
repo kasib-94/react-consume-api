@@ -9,6 +9,7 @@ function CardList({
                   }) {
 
     const [cards, setCards] = useState([])
+
     const {id} = useParams()
 
     useEffect(() => {
@@ -19,8 +20,14 @@ function CardList({
                 .then(response => response.json())
                 .then(json => setCards(json.filter(x => x.albumId == id)))
         }
-
-        fetchData()
+        if (id !== undefined) {
+            fetchData()
+        }
+        if (id === undefined) {
+            fetch('https://jsonplaceholder.typicode.com/photos')
+                .then(response => response.json())
+                .then(json => setCards(json.filter(x => x.albumId == albumId)))
+        }
         console.log(cards)
 
     }, [])
@@ -31,14 +38,13 @@ function CardList({
 
             <div className="flex-row flex-wrap justify-between overflow-y-auto">
 
-                {console.log(cards)}
                 {cards.map((item) => {
                     return <Card
-                        containerSelector
                         key={item.id}
                         thumbnailUrl={item.thumbnailUrl}
                         url={item.url}
                         title={item.title}
+                        albumId={item.albumId}
                     />
                 })}
 

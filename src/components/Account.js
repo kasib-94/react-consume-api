@@ -1,12 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
+import Post from "./Post";
+import Album from "./Album";
+import CardList from "./CardList";
+
 
 function Account() {
 
 
     const navigate = useNavigate();
-
-
+    const [albums, setAlbums] = useState([])
+    const [posts, setPosts] = useState([])
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -26,10 +30,30 @@ function Account() {
         })
             .then((response) => response.json())
             .then((json) => console.log(json));
-        
+
         navigate("/home")
 
     }
+
+    useEffect(() => {
+
+
+        fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`)
+            .then(response => response.json())
+            .then(json => setPosts(json))
+
+
+        fetch(`https://jsonplaceholder.typicode.com/albums?userId=${user.id}`)
+            .then(response => response.json())
+            .then(json => setAlbums(json.map(x => x.id)))
+
+
+    }, [])
+
+    function handleClick() {
+        console.log(albums)
+    }
+
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -84,6 +108,29 @@ function Account() {
                     </button>
                 </div>
             </form>
+  
+            <div className="flex-row flex-wrap justify-between overflow-y-auto">
+
+
+                {posts.map((item) => {
+                    return <Post
+                        key={item.id}
+                        id={item.id}
+                        userId={item.userId}
+                        title={item.title}
+                        body={item.body}
+                        comments={true}
+                    />
+                })}
+
+            </div>
+            <div className="flex-row flex-wrap justify-between overflow-y-auto">
+                {albums.map((item) => {
+                    return <CardList
+                        albumId={item}
+                    />
+                })}
+            </div>
         </>
     )
 }
