@@ -17,8 +17,6 @@ export const Album = ({
 
 
     })
-    console.log(data)
-
 
     function linkToCardList() {
         console.log(data.id)

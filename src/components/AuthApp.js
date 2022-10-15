@@ -17,6 +17,7 @@ import CardList from "./CardList";
 import Card from "./Card";
 import Post from "./Post";
 import PostView from "./PostView";
+import AddPhoto from "./AddPhoto";
 
 
 function AuthApp() {
@@ -30,6 +31,7 @@ function AuthApp() {
 
                             < Navbar/>
                             <UserSearch/>
+
                             < Home/>
                         </>
 
@@ -107,6 +109,14 @@ function AuthApp() {
                             < Navbar/>
                             <UserSearch/>
                             <PostList/>
+                        </>
+
+                    }/>
+                    <Route path="/addphoto" element={
+                        <>
+
+                            < Navbar/>
+                            <AddPhoto/>
                         </>
 
                     }/>
