@@ -7,6 +7,7 @@ import Card from "./Card";
 function PostView() {
     const [post, setPost] = useState()
     const [comments, setComments] = useState([])
+    const [deleteButton, setDelete] = useState(true)
     const {id} = useParams()
 
     useEffect(() => {
@@ -14,7 +15,6 @@ function PostView() {
             .then(response => response.json())
             .then(json => setPost(json))
 
-        console.log(post)
 
         fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`)
             .then(response => response.json())
@@ -23,6 +23,31 @@ function PostView() {
 
     }, [])
 
+    console.log(post)
+
+    function handleSubmit(e) {
+        e.preventDefault()
+
+        fetch('https://jsonplaceholder.typicode.com/comments', {
+            method: 'POST',
+            body: JSON.stringify({
+                postId: `${post.id}`,
+                title: `${document.getElementById('commentTitle').value}`,
+                body: `${document.getElementById('commentBody').value}`,
+                email: JSON.parse(localStorage.getItem('user')).email,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+        window.location.reload()
+    }
+
+    function deleteComment(e) {
+        console.log(e)
+    }
 
     if (post !== undefined && comments !== undefined) {
         console.log(comments)
@@ -30,7 +55,6 @@ function PostView() {
         return (
 
             <div className="mx-auto text-center">
-                <div>PostView Component</div>
                 <Post id={post.id}
                       userId={post.userId}
                       text={post.title}
@@ -56,11 +80,44 @@ function PostView() {
                         </div>
                         <p className="-mt-4 text-gray-500">{item.body}</p>
                         {
-
+                            JSON.parse(localStorage.getItem('user')).email == item.email ?
+                                (
+                                    <button
+                                        onClick={deleteComment(item.id)}
+                                        className=" mx-4 bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-5 border border-red-500 w-30"
+                                    >
+                                        Delete Your Comment !
+                                    </button>
+                                ) :
+                                ''
                         }
                     </div>
-                })}
 
+                })}
+                <form onSubmit={handleSubmit} className="row-auto mb-10">
+                    <div className="w-2/3">
+                        <div className="mb-6">
+                            <label htmlFor="base-input"
+                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Comment
+                                Title
+                            </label>
+                            <input type="text" id="commentTitle"
+                                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                        </div>
+                        <div className="mb-6">
+                            <label htmlFor="large-input"
+                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Comment
+                                Text
+                            </label>
+                            <textarea rows={5} type="text" id="commentBody"
+                                      className="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                        </div>
+                        <button
+                            className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-1/6">Add
+                            Comment
+                        </button>
+                    </div>
+                </form>
             </div>
         )
     }

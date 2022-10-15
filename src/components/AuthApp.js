@@ -64,6 +64,7 @@ function AuthApp() {
                         <>
 
                             < Navbar/>
+                            <UserSearch/>
                             <AlbumList/>
                         </>
 
@@ -104,6 +105,7 @@ function AuthApp() {
                         <>
 
                             < Navbar/>
+                            <UserSearch/>
                             <PostList/>
                         </>
 
