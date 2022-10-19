@@ -33,7 +33,7 @@ export const Post = ({
 
     }
 
-    function deletePost() {
+    function deleteComment() {
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
             method: 'DELETE',
         });
@@ -72,7 +72,7 @@ export const Post = ({
                         </button>
                         {user.id == userId ?
                             <button
-                                onClick={deletePost}
+                                onClick={deleteComment}
                                 className=" mx-4 bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-5 border border-red-500 w-30"
                             >
                                 Delete !
