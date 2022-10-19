@@ -11,6 +11,7 @@ export const Post = ({
                      }) => {
 
     const navigate = useNavigate();
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
     const [data, setUsername] = useState(() => {
         fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
             .then(response => response.json())
@@ -31,6 +32,14 @@ export const Post = ({
         navigate(`../post/${id}`)
 
     }
+
+    function deletePost() {
+        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+            method: 'DELETE',
+        });
+        window.location.reload()
+    }
+
 
     if (data !== undefined) {
         return (
@@ -61,6 +70,16 @@ export const Post = ({
                         >{comments == true ? "See Comments !" : ''}
 
                         </button>
+                        {user.id == userId ?
+                            <button
+                                onClick={deletePost}
+                                className=" mx-4 bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-5 border border-red-500 w-30"
+                            >
+                                Delete !
+                            </button>
+                            :
+                            ""
+                        }
 
                     </div>
                 </div>

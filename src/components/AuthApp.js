@@ -18,6 +18,7 @@ import Card from "./Card";
 import Post from "./Post";
 import PostView from "./PostView";
 import AddPhoto from "./AddPhoto";
+import AddPost from "./AddPost";
 
 
 function AuthApp() {
@@ -120,6 +121,15 @@ function AuthApp() {
                         </>
 
                     }/>
+                    <Route path="/newpost" element={
+                        <>
+
+                            < Navbar/>
+                            <AddPost/>
+                        </>
+
+                    }/>
+
                 </Routes>
 
             </Router>

@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Post from "./Post";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 function PostList() {
-
+    const navigate = useNavigate();
     const [posts, setPosts] = useState([])
     const {id} = useParams()
 
@@ -28,10 +28,21 @@ function PostList() {
 
     }, [])
 
+    function addPost() {
+        navigate("../newpost")
+    }
 
     return (
         <>
+            <div className="addPhoto pb-20">
+                <button
+                    onClick={addPost}
+                    className="ml-40  bg-gradient-to-b from-blue-700 to-blue-500 font-medium p-2 md:p-4 text-white uppercase w-1/6"> Add
+                    New Post
 
+                </button>
+
+            </div>
             <div className="flex-row flex-wrap justify-between overflow-y-auto">
 
                 {console.log(posts)}

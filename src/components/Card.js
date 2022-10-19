@@ -23,7 +23,7 @@ export const Card = ({
 
     }, [])
 
-    function deleteComment() {
+    function deleteCard() {
         fetch(`https://jsonplaceholder.typicode.com/photos/${id}`, {
             method: 'DELETE',
         });
@@ -48,7 +48,7 @@ export const Card = ({
                 </a>
                 {albums.includes(albumId) ?
                     <button
-                        onClick={deleteComment}
+                        onClick={deleteCard}
                         className=" mx-4 bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-5 border border-red-500 w-30"
                     >
                         Delete !
