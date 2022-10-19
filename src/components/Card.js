@@ -15,10 +15,11 @@ export const Card = ({
     const [albums, setAlbums] = useState([])
     useEffect(() => {
 
-        fetch(`https://jsonplaceholder.typicode.com/albums?userId=${user.id}`)
+        const fetchData = () => fetch(`https://jsonplaceholder.typicode.com/albums?userId=${user.id}`)
             .then(response => response.json())
             .then(json => setAlbums(json.map(x => x.id)))
 
+        fetchData()
 
     }, [])
 

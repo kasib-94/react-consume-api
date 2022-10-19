@@ -87,7 +87,7 @@ function AuthApp() {
                         </>
 
                     }/>
-                    <Route path="/card/:id" element={
+                    <Route path="/card/:idd" element={
                         <>
 
                             < Navbar/>
