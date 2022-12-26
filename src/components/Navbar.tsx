@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {UserInterface} from "../shared/type.interfaces";
+import User from "./User";
 
 function Navbar() {
     const navigate = useNavigate();
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+    const [user, setUser] = useState<UserInterface>(JSON.parse(localStorage.getItem('user' )|| "" ))
     return (
         <>
             <nav className="bg-white border-gray-200 dark:bg-gray-900">

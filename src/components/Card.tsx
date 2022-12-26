@@ -1,23 +1,33 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {AlbumInterface, UserInterface} from "../shared/type.interfaces";
 
+
+
+export interface CardProps{
+    thumbnailUrl? : string
+    url? : string
+    title? :string
+    id? :number
+    albumId? : number
+
+}
 
 export const Card = ({
-
                          thumbnailUrl,
                          url,
                          title,
                          id,
                          albumId
-                     }) => {
+                     } : CardProps) => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
-    const [albums, setAlbums] = useState([])
+    const [user, setUser] = useState<UserInterface>(JSON.parse(localStorage.getItem('user' )|| "" ))
+    const [albums, setAlbums] = useState<Array<number> >([])
     useEffect(() => {
 
         const fetchData = () => fetch(`https://jsonplaceholder.typicode.com/albums?userId=${user.id}`)
             .then(response => response.json())
-            .then(json => setAlbums(json.map(x => x.id)))
+            .then(json => setAlbums(json.map((x: { id: any; }) => x.id)))
 
         fetchData()
 
@@ -30,8 +40,9 @@ export const Card = ({
         window.location.reload()
     }
 
-
+if (albums!==undefined&& albumId !==undefined){
     return (
+        <>
         <div
 
             className="inline-block  w-1/3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 justify-center">
@@ -46,7 +57,7 @@ export const Card = ({
                     See Photo
 
                 </a>
-                {albums.includes(albumId) ?
+                {(albums.includes(albumId)) ?
                     <button
                         onClick={deleteCard}
                         className=" mx-4 bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-5 border border-red-500 w-30"
@@ -59,7 +70,11 @@ export const Card = ({
 
             </div>
         </div>
+        </>
     )
+}else {
+    return (<></>)
+}
 }
 
 export default Card

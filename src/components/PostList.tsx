@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import Post from "./Post";
-import {useNavigate, useParams} from "react-router-dom";
-
+import Post, {PostProps} from "./Post";
+import {Params, useNavigate, useParams} from "react-router-dom";
+import {PostInterface} from "../shared/type.interfaces"
 
 function PostList() {
     const navigate = useNavigate();
-    const [posts, setPosts] = useState([])
-    const {id} = useParams()
+    const [posts, setPosts] = useState<Array<PostProps>>([])
+    const {id} = useParams<Params>()
 
     useEffect(() => {
 
@@ -15,7 +15,7 @@ function PostList() {
             if (id !== undefined) {
                 fetch('https://jsonplaceholder.typicode.com/posts')
                     .then(response => response.json())
-                    .then(json => setPosts(json.filter(x => x.userId == id)))
+                    .then(json => setPosts(json.filter((x:any) => x.userId == id)))
             } else {
                 fetch('https://jsonplaceholder.typicode.com/posts')
                     .then(response => response.json())
@@ -43,18 +43,19 @@ function PostList() {
                 </button>
 
             </div>
+
             <div className="flex-row flex-wrap justify-between overflow-y-auto">
 
-                {console.log(posts)}
-                {posts.map((item) => {
-                    return <Post
+                {posts.map((item : PostProps) => {
+                    return<>{ <Post
                         key={item.id}
                         id={item.id}
                         userId={item.userId}
                         title={item.title}
                         body={item.body}
                         comments={true}
-                    />
+                    />}
+                    </>
                 })}
 
             </div>

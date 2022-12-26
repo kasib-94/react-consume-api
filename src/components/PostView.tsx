@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import Post from "./Post";
-import Card from "./Card";
+import Post, {PostProps} from "./Post";
+import {CommentsInterface} from "../shared/type.interfaces";
+
 
 
 function PostView() {
-    const [post, setPost] = useState()
+    const [post, setPost] = useState<PostProps>()
     const [comments, setComments] = useState([])
     const [deleteButton, setDelete] = useState(true)
     const {id} = useParams()
@@ -23,18 +24,18 @@ function PostView() {
 
     }, [])
 
-    console.log(post)
 
-    function handleSubmit(e) {
+
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-
+if (post!==undefined){
         fetch('https://jsonplaceholder.typicode.com/comments', {
             method: 'POST',
             body: JSON.stringify({
                 postId: `${post.id}`,
-                title: `${document.getElementById('commentTitle').value}`,
-                body: `${document.getElementById('commentBody').value}`,
-                email: JSON.parse(localStorage.getItem('user')).email,
+                title: `${(document.getElementById('commentTitle')as HTMLInputElement).value}`,
+                body: `${(document.getElementById('commentBody')as HTMLInputElement).value}`,
+                email: (JSON.parse(localStorage.getItem('user') as string)).email,
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -43,25 +44,28 @@ function PostView() {
             .then((response) => response.json())
             .then((json) => console.log(json));
         window.location.reload()
+}
     }
 
-    function deleteComment(e) {
-        console.log(e)
+    function deleteComment(id:number   ) {
+
     }
 
     if (post !== undefined && comments !== undefined) {
-        console.log(comments)
+
 
         return (
-
+<>
             <div className="mx-auto text-center">
+                <>
                 <Post id={post.id}
                       userId={post.userId}
-                      text={post.title}
+                      title={post.title}
                       body={post.body}
                       comments={false}
                 ></Post>
-                {comments.map((item) => {
+                </>
+                {comments.map((item:CommentsInterface) => {
                     return <div
                         className="w-1/3 relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg">
                         <div className="relative flex gap-4">
@@ -80,10 +84,13 @@ function PostView() {
                         </div>
                         <p className="-mt-4 text-gray-500">{item.body}</p>
                         {
-                            JSON.parse(localStorage.getItem('user')).email == item.email ?
+                            (JSON.parse(localStorage.getItem('user' )|| "" )).email == item.email ?
                                 (
                                     <button
-                                        onClick={deleteComment(item.id)}
+
+                                        onClick={event => {
+                                            {deleteComment(item.id)}
+                                        }}
                                         className=" mx-4 bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-5 border border-red-500 w-30"
                                     >
                                         Delete Your Comment !
@@ -109,7 +116,7 @@ function PostView() {
                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Comment
                                 Text
                             </label>
-                            <textarea rows={5} type="text" id="commentBody"
+                            <textarea rows={5} typeof={"text"} id="commentBody"
                                       className="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                         </div>
                         <button
@@ -119,7 +126,10 @@ function PostView() {
                     </div>
                 </form>
             </div>
-        )
+</>)
+    }
+    else {
+        return (<></>)
     }
 }
 

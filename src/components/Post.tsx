@@ -1,6 +1,16 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import User from "./User";
+import {UserInterface} from "../shared/type.interfaces";
 
+
+export interface PostProps{
+    userId : number
+    id : number
+    title :string
+    body :string
+    comments : boolean
+}
 export const Post = ({
 
                          userId,
@@ -8,11 +18,11 @@ export const Post = ({
                          title,
                          body,
                          comments
-                     }) => {
+                     }:PostProps) => {
 
     const navigate = useNavigate();
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
-    const [data, setUsername] = useState(() => {
+    const [user, setUser] = useState<UserInterface>(JSON.parse(localStorage.getItem('user' )|| "" ))
+    const [data, setUsername] = useState<UserInterface>(function (): any {
         fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
             .then(response => response.json())
             .then(json => setUsername(json))
@@ -22,7 +32,7 @@ export const Post = ({
 
 
     function linkToUser() {
-        console.log(data.id)
+
         navigate(`../users/${data.id}`)
 
     }
@@ -41,9 +51,9 @@ export const Post = ({
     }
 
 
-    if (data !== undefined) {
+if (data!==undefined){
         return (
-
+             <>
             <div className="flex-row justify-evenly w-auto inline-block w-full p-4 max-w-lg h-60 ">
                 <div className="space-y-2 h-40 ">
                     <h3 className="text-2xl font-semibold">
@@ -85,8 +95,12 @@ export const Post = ({
                 </div>
             </div>
 
+         </>
         )
-    }
+}else{
+    return (<></>)
 }
+    }
+
 
 export default Post

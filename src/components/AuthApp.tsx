@@ -32,7 +32,6 @@ function AuthApp() {
 
                             < Navbar/>
                             <UserSearch/>
-
                             < Home/>
                         </>
 

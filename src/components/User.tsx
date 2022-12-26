@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {UserInterface} from "../shared/type.interfaces";
 
 
 function User() {
 
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState<UserInterface>(JSON.parse(localStorage.getItem('user' )|| "" ))
     const {id} = useParams()
     useEffect(() => {
 

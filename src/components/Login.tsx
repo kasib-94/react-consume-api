@@ -1,24 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
+import {UserInterface} from "../shared/type.interfaces";
 
 
 function Login() {
     const navigate = useNavigate();
-    const [users, setUsers] = useState(true);
+    const [users, setUsers] = useState<UserInterface[] >([]);
     const [errors, setError] = useState("pt-3 hidden")
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(document.getElementById("username").value)
 
-        const result = users.find(item => item.email === document.getElementById("username").value)
+    const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        const result = users.find((item) => item.email === (document.getElementById("username") as HTMLInputElement).value)
         console.log(users)
         console.log(result)
         if (result !== undefined) {
-
             localStorage.setItem('user', JSON.stringify(result));
-            console.log(JSON.parse(localStorage.getItem('user')))
             navigate("/home");
             window.location.reload()
 

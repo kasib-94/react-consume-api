@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Card from "./Card";
+import Card, {CardProps} from "./Card";
 import Pagination from "./Pagination";
 import {useNavigate} from "react-router-dom";
 
@@ -49,9 +49,9 @@ function Home() {
             <div className="flex-row flex-wrap justify-between overflow-y-auto">
 
 
-                {currentPosts.map((item) => {
+                {currentPosts.map((item:CardProps) => {
                     return <Card
-                        containerSelector
+
                         key={item.id}
                         thumbnailUrl={item.thumbnailUrl}
                         url={item.url}

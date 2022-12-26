@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
-import Post from "./Post";
+import Post, {PostProps} from "./Post";
 import Album from "./Album";
 import CardList from "./CardList";
+import {UserInterface} from "../shared/type.interfaces";
 
 
 function Account() {
@@ -11,15 +12,16 @@ function Account() {
     const navigate = useNavigate();
     const [albums, setAlbums] = useState([])
     const [posts, setPosts] = useState([])
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
-    const handleSubmit = (e) => {
+    const [user, setUser] = useState<UserInterface>(JSON.parse(localStorage.getItem('user' )|| "" ))
+    const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        user.name = document.getElementById("form-name").value
-        user.username = document.getElementById("form-username").value
-        user.address.street = document.getElementById("form-street").value
-        user.address.suite = document.getElementById("form-suite").value
-        user.address.city = document.getElementById("form-city").value
-        user.address.zipcode = document.getElementById("form-zipcode").value
+        //(document.getElementById("username") as HTMLInputElement).value)
+        user.name = (document.getElementById("form-name")as HTMLInputElement).value
+        user.username = (document.getElementById("form-username")as HTMLInputElement).value
+        user.address.street = (document.getElementById("form-street")as HTMLInputElement).value
+        user.address.suite = (document.getElementById("form-suite")as HTMLInputElement).value
+        user.address.city = (document.getElementById("form-city")as HTMLInputElement).value
+        user.address.zipcode = (document.getElementById("form-zipcode")as HTMLInputElement).value
 
         fetch(`https://jsonplaceholder.typicode.com/users/${user.id}`, {
             method: 'Put',
@@ -45,7 +47,7 @@ function Account() {
 
         fetch(`https://jsonplaceholder.typicode.com/albums?userId=${user.id}`)
             .then(response => response.json())
-            .then(json => setAlbums(json.map(x => x.id)))
+            .then(json => setAlbums(json.map((x: { id: any; }) => x.id)))
 
 
     }, [])
@@ -112,7 +114,7 @@ function Account() {
             <div className="flex-row flex-wrap justify-between overflow-y-auto">
 
 
-                {posts.map((item) => {
+                {posts.map((item:PostProps) => {
                     return <Post
                         key={item.id}
                         id={item.id}

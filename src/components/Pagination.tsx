@@ -1,7 +1,18 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import './Pagination.css'
 
-const Pagination = ({totalPosts, postsPerPage, setCurrentPage, currentPage}) => {
+interface PaginationProps{
+    totalPosts : number
+    postsPerPage : number
+    setCurrentPage : Dispatch<SetStateAction<number>>
+    currentPage : number
+}
+const Pagination = ({
+                        totalPosts,
+                        postsPerPage,
+                        setCurrentPage,
+                        currentPage
+}:PaginationProps) => {
     let pages = []
 
     for (let i = 0; i <= Math.ceil(totalPosts / postsPerPage); i++) {
